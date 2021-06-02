@@ -18,7 +18,9 @@ public class PlayerWeaponHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) _activeGun?.ShotGun(GunPoint);
+        if (Input.GetKeyDown(KeyCode.Mouse0)) _activeGun?.Shot(GunPoint);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchGun(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchGun(1);
     }
 
     #region Gun Inventory Management
@@ -31,7 +33,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void SwitchGun(int index)
     {
-        
+        _activeGun = _guns[index];
     }
 
     public void NextGun()

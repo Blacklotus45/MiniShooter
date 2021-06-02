@@ -3,7 +3,7 @@
 public class Pistol: IGun
 {
 
-    public void ShotGun(Transform gunPoint)
+    public void Shot(Transform gunPoint)
     {
         GameObject bullet = PoolManager.POOL.SpawnBullet();
         bullet.transform.position = gunPoint.position;
