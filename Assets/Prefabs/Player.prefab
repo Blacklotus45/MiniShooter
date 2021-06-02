@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 71faba75a098375499631badf16519b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99893d8edf58ce4c8a87c0353d20a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 2
-  SprintSpeed: 2
+  Speed: 4
+  SprintSpeed: 4
 --- !u!114 &1582950529689276036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cfc01cbd1aa3be47b272a9fbe47dc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1189934574871613373, guid: 329cbbbc194fcb44f950432f4417eb18, type: 3}
   GunPoint: {fileID: 5880275497163331181}
 --- !u!1 &1582950529804549919
 GameObject:

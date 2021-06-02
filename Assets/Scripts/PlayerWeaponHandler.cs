@@ -9,9 +9,16 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject bullet = PoolManager.POOL.SpawnBullet();
-            bullet.transform.position = GunPoint.position;
-            bullet.transform.rotation = Quaternion.LookRotation(GunPoint.forward);
+            ShootGun();
         }
+    }
+
+    private void ShootGun()
+    {
+        GameObject bullet = PoolManager.POOL.SpawnBullet();
+        bullet.transform.position = GunPoint.position;
+        bullet.transform.rotation = Quaternion.LookRotation(GunPoint.forward);
+        
+        UIManager.UIman.IncreaseBuleltCount();
     }
 }
