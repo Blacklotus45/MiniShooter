@@ -1,10 +1,13 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerWeaponHandler : MonoBehaviour
 {
     public Transform GunPoint;
+
+    public Image PistolOverlay;
+    public Image ShotgunOverlay;
 
     private IGun _activeGun;
 
@@ -39,17 +42,28 @@ public class PlayerWeaponHandler : MonoBehaviour
     {
         if (_guns.Count < index + 1) return;
         _activeGun = _guns[index];
-    }
-
-    public void NextGun()
-    {
-        
-    }
-
-    public void PreviousGun()
-    {
-        
+        HandleGunUI(index);
     }
 
     #endregion
+
+    private void HandleGunUI(int activeGunIndex)
+    {
+        Color activeElement = Color.white;
+        activeElement.a = 0f;
+        Color deactivateElement = Color.black;
+        deactivateElement.a = 0.6f;
+        
+        switch (activeGunIndex)
+        {
+            case 0:
+                PistolOverlay.color = activeElement;
+                ShotgunOverlay.color = deactivateElement;
+                break;
+            case 1:
+                PistolOverlay.color = deactivateElement;
+                ShotgunOverlay.color = activeElement;
+                break;
+        }
+    }
 }
