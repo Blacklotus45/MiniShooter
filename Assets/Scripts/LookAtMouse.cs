@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class LookAtMouse : MonoBehaviour
 
     private Transform _localTransform; //Unity access has overhead
     private float _cameraVerticalAngle = 0f;
+    private LockUpdate _locker;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,13 +18,38 @@ public class LookAtMouse : MonoBehaviour
         _localTransform = transform;
         if (MainCamera == null) Debug.LogError("Assign Main Camera to player look at script");
 
+        LockCursor();
+        _locker = new LockUpdate();
+    }
+
+    private void ToggleCursor()
+    {
+        if (_locker.Lock) UnlockCursor();
+        else LockCursor();
+    }
+
+    private static void LockCursor()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
+    private static void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     // Update is called once per frame
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _locker.ToggleLock();
+            ToggleCursor();
+        }
+        if (_locker.Lock) return;
         HandleRotation();
     }
 

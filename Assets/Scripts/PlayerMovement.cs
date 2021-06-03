@@ -9,17 +9,21 @@ public class PlayerMovement : MonoBehaviour
     private float HorizontalAxis;
     private float VerticalAxis;
     private Transform _cacheTransform;
+    private LockUpdate _locker;
 
     // Start is called before the first frame update
     void Awake()
     {
         RigB = GetComponent<Rigidbody>();
         _cacheTransform = transform;
+        _locker = new LockUpdate();
     }
 
     // Update is called once per frame
     void Update()
     {   
+        if (Input.GetKeyDown(KeyCode.Escape)) _locker.ToggleLock();
+        if (_locker.Lock) return;
         UpdateAxies();
         RunToggle();
         MovementHandler();

@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager UIman;
     public TextMeshProUGUI BulletCounterText;
+    public GameObject EscMenu;
     
     private int _bulletCount;
     
@@ -17,14 +18,34 @@ public class UIManager : MonoBehaviour
         PrintBulletCount();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) ToggleEscMenu();
+    }
+
+    private void ToggleEscMenu()
+    {
+        EscMenu.SetActive(!EscMenu.activeSelf);
+    }
+
+    private void PrintBulletCount()
+    {
+        BulletCounterText.text = _bulletCount.ToString();
+    }
+
     public void IncreaseBuleltCount()
     {
         _bulletCount++;
         PrintBulletCount();
     }
 
-    private void PrintBulletCount()
+    public void ExitApplication()
     {
-        BulletCounterText.text = _bulletCount.ToString();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+#if UNITY_STANDALONE
+        Application.Quit();
+#endif
     }
 }

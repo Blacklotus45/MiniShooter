@@ -54,7 +54,7 @@ public class PoolManager : MonoBehaviour
         explosion.SetActive(true);
         explosion.transform.localPosition = explosionSite.position;
 
-        _explosionIndex++;
+        _explosionIndex = ++_explosionIndex % 30;
     }
 
     public void ReturnBulletToPool(GameObject bullet)
@@ -63,21 +63,24 @@ public class PoolManager : MonoBehaviour
         bullet.SetActive(false);
     }
 
-    public void ToggleBigBullets(bool big)
+    public void ToggleBigBullets()
     {
-        if (big) ScaleUpBullets();
+        _bigBullets = !_bigBullets;
+        if (_bigBullets) ScaleUpBullets();
         else ScaleDownBullets();
     }
 
-    public void ToggleRedBullets(bool red)
+    public void ToggleRedBullets()
     {
-        if (red) PaintRedBullets();
+        _redBullets = !_redBullets;
+        if (_redBullets) PaintRedBullets();
         else PaintWhiteBullets();
     }
 
-    public void ToggleExplosiveBullets(bool explosive)
+    public void ToggleExplosiveBullets()
     {
-        if (explosive) ExplosiveBullets();
+        _explosiveBullets = !_explosiveBullets;
+        if (_explosiveBullets) ExplosiveBullets();
         else StandardBullets();
     }
     

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512dbd5ef1fc79f47af129f03659dd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: 5
+  Velocity: 10
   KillTimer: 5
   _meshHolder: {fileID: 3871069192399295570}
 --- !u!1 &3871069192399295570
