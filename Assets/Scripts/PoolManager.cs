@@ -19,6 +19,7 @@ public class PoolManager : MonoBehaviour
     private int _explosionIndex = 0;
 
     private List<GameObject> _explosionPool;
+    private int _explosionPoolSize = 100;
 
     #endregion
 
@@ -29,7 +30,7 @@ public class PoolManager : MonoBehaviour
         POOL = this;
 
         _bulletPool = new List<GameObject>(_bulletCapacity);
-        _explosionPool = new List<GameObject>(30);
+        _explosionPool = new List<GameObject>(_explosionPoolSize);
     }
 
     private void Start()
@@ -54,7 +55,7 @@ public class PoolManager : MonoBehaviour
         explosion.SetActive(true);
         explosion.transform.localPosition = explosionSite.position;
 
-        _explosionIndex = ++_explosionIndex % 30;
+        _explosionIndex = ++_explosionIndex % _explosionPoolSize;
     }
 
     public void ReturnBulletToPool(GameObject bullet)
@@ -117,7 +118,7 @@ public class PoolManager : MonoBehaviour
 
     private void FillExplosionList()
     {
-        for (int i = 0; i < 30; i++) AddNewExplosionToList();
+        for (int i = 0; i < _explosionPoolSize; i++) AddNewExplosionToList();
     }
 
     private void AddNewBulletToList()

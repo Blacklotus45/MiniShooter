@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1744059003650471656}
   - component: {fileID: 1744059003650471657}
   - component: {fileID: 1744059003650471658}
-  - component: {fileID: 1744059003650471659}
+  - component: {fileID: 1309784801}
   - component: {fileID: 1744059003650471660}
   m_Layer: 0
   m_Name: WeaponPickup
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744059003650471661}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -688421481174827455, guid: 408acf3012eb34d46a330c939847cb50, type: 3}
 --- !u!23 &1744059003650471658
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ca37bb197bf0d494680c017077b94748, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1744059003650471659
+--- !u!65 &1309784801
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2, y: 2.7, z: 2.2}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Size: {x: 3.32, y: 3.46, z: 2.39}
+  m_Center: {x: 0.00034999847, y: -0.6264303, z: 1.0920802}
 --- !u!114 &1744059003650471660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876c998dc3f7cb0489a98ac9f3220827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 1

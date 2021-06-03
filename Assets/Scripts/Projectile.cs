@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
 
     private void Fire()
     {
-        timer = _isExplosive ? KillTimer - 1f : 0f;
+        timer = _isExplosive ? KillTimer - 1f + Random.Range(-0.5f,0.5f) : 0f;
     }
 
     public void ToggleBig(bool isBig)
