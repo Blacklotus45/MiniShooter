@@ -6131,6 +6131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 1189934574871613373, guid: 329cbbbc194fcb44f950432f4417eb18, type: 3}
+  ExplosionPrefab: {fileID: 3522751230994809544, guid: 244e95f5ca17d4f49b300fdfd937a362, type: 3}
 --- !u!4 &1913737553
 Transform:
   m_ObjectHideFlags: 0

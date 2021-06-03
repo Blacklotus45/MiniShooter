@@ -33,6 +33,7 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     public void SwitchGun(int index)
     {
+        if (_guns.Count < index + 1) return;
         _activeGun = _guns[index];
     }
 

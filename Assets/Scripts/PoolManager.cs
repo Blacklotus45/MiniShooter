@@ -7,10 +7,18 @@ public class PoolManager : MonoBehaviour
 
     public static PoolManager POOL;
     public GameObject BulletPrefab;
+    public GameObject ExplosionPrefab;
 
     private List<GameObject> _bulletPool;
     private int _bulletCapacity = 15;
     private int _bulletsInUSe = 0;
+
+    private bool _bigBullets = false;
+    private bool _redBullets = false;
+    private bool _explosiveBullets = false;
+    private int _explosionIndex = 0;
+
+    private List<GameObject> _explosionPool;
 
     #endregion
 
@@ -21,11 +29,13 @@ public class PoolManager : MonoBehaviour
         POOL = this;
 
         _bulletPool = new List<GameObject>(_bulletCapacity);
+        _explosionPool = new List<GameObject>(30);
     }
 
     private void Start()
     {
         FillBulletList();
+        FillExplosionList();
     }
 
     #endregion
@@ -38,11 +48,39 @@ public class PoolManager : MonoBehaviour
         return FindInactiveBullet();
     }
 
+    public void SpawnExplosion(Transform explosionSite)
+    {
+        GameObject explosion = _explosionPool[_explosionIndex];
+        explosion.SetActive(true);
+        explosion.transform.localPosition = explosionSite.position;
+
+        _explosionIndex++;
+    }
+
     public void ReturnBulletToPool(GameObject bullet)
     {
         _bulletsInUSe--;
         bullet.SetActive(false);
     }
+
+    public void ToggleBigBullets(bool big)
+    {
+        if (big) ScaleUpBullets();
+        else ScaleDownBullets();
+    }
+
+    public void ToggleRedBullets(bool red)
+    {
+        if (red) PaintRedBullets();
+        else PaintWhiteBullets();
+    }
+
+    public void ToggleExplosiveBullets(bool explosive)
+    {
+        if (explosive) ExplosiveBullets();
+        else StandardBullets();
+    }
+    
 
     #endregion
 
@@ -74,11 +112,77 @@ public class PoolManager : MonoBehaviour
         for (int i = 0; i < _bulletCapacity; i++) AddNewBulletToList();
     }
 
+    private void FillExplosionList()
+    {
+        for (int i = 0; i < 30; i++) AddNewExplosionToList();
+    }
+
     private void AddNewBulletToList()
     {
         var newBullet =Instantiate(BulletPrefab, transform);
         newBullet.SetActive(false);
+
+        SetProjectileToggles(newBullet);
+        
         _bulletPool.Add(newBullet);
+    }
+
+    private void AddNewExplosionToList()
+    {
+        var newExplosion =Instantiate(ExplosionPrefab, transform);
+        newExplosion.SetActive(false);
+        
+        _explosionPool.Add(newExplosion);
+    }
+
+    private void ScaleUpBullets()
+    {
+        _bigBullets = true;
+        RefreshBulletProperties();
+    }
+
+    private void ScaleDownBullets()
+    {
+        _bigBullets = false;
+        RefreshBulletProperties();
+    }
+
+    private void PaintRedBullets()
+    {
+        _redBullets = true;
+        RefreshBulletProperties();
+    }
+
+    private void PaintWhiteBullets()
+    {
+        _redBullets = false;
+        RefreshBulletProperties();
+    }
+
+    private void ExplosiveBullets()
+    {
+        _explosiveBullets = true;
+        RefreshBulletProperties();
+    }
+
+    private void StandardBullets()
+    {
+        _explosiveBullets = false;
+        RefreshBulletProperties();
+    }
+    
+
+    private void RefreshBulletProperties()
+    {
+        foreach (GameObject projectile in _bulletPool) SetProjectileToggles(projectile);
+    }
+
+    private void SetProjectileToggles(GameObject projectile)
+    {
+        Projectile iterator = projectile.GetComponent<Projectile>();
+        iterator.ToggleBig(_bigBullets);
+        iterator.ToggleRed(_redBullets);
+        iterator.ToggleExplosion(_explosiveBullets);
     }
 
     #endregion
