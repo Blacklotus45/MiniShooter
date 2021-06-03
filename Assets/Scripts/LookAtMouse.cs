@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LookAtMouse : MonoBehaviour
@@ -16,10 +13,23 @@ public class LookAtMouse : MonoBehaviour
     void Awake()
     {
         _localTransform = transform;
-        if (MainCamera == null) Debug.LogError("Assign Main Camera to player look at script");
-
-        LockCursor();
         _locker = new LockUpdate();
+    }
+
+    private void Start()
+    {
+        LockCursor();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _locker.ToggleLock();
+            ToggleCursor();
+        }
+        if (_locker.Lock) return;
+        HandleRotation();
     }
 
     private void ToggleCursor()
@@ -38,19 +48,6 @@ public class LookAtMouse : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
-
-    // Update is called once per frame
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            _locker.ToggleLock();
-            ToggleCursor();
-        }
-        if (_locker.Lock) return;
-        HandleRotation();
     }
 
     private void HandleRotation()
@@ -76,8 +73,8 @@ public class LookAtMouse : MonoBehaviour
 
     private float UpdateAxies(out float vertical)
     {
-        float horizontal = Input.GetAxisRaw("Mouse X") * damper;
-        vertical = -1 * Input.GetAxisRaw("Mouse Y") * damper;
+        float horizontal = Input.GetAxis("Mouse X") * damper;
+        vertical = -1 * Input.GetAxis("Mouse Y") * damper;
         return horizontal;
     }
 }
